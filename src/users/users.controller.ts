@@ -22,11 +22,10 @@ export class UsersController {
       }
     }
     //create user
-    @Post()
-    async create(@Body() user: createUserDto) {
-      return this.usersService.create(user);
-    
-    }
+    // @Post()
+    // async create(@Body() user: createUserDto) {
+    //   return this.usersService.create(user);
+    // }
   
     //update user
     @Put(':id')

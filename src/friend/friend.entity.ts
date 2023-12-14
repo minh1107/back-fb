@@ -10,11 +10,6 @@ export class Friend extends Common {
     @Column()
     status: boolean
 
-    @ManyToOne(() => Users, {nullable: false})
-    @JoinColumn({ name: 'user_id', referencedColumnName: 'user_id' })
-    user_id: Users
-
-    @ManyToOne(() => Users, {nullable: false})
-    @JoinColumn({ name: 'friend', referencedColumnName: 'user_id' })
-    friend: Users
+    @ManyToMany(() => Users, user => user.friends)
+    users: Users[]
 }

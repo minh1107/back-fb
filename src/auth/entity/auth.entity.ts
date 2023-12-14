@@ -1,5 +1,6 @@
 import { Common } from "src/common/common.entity";
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Users } from "src/users/users.entity";
+import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
 
 @Entity()
 export class Auth {
@@ -10,7 +11,8 @@ export class Auth {
     refresh_token: string
 
     @Column()
-    role: string
+    expiredTime: Date;
 
-    
+    @ManyToOne(() => Users, user => user.session)
+    user: Users
 }

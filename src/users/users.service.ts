@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Users } from "./users.entity";
 import { MailService } from "../mail/mail.service";
+import { getCurrentDate } from "src/utils/helper/getCurrentDate.helper";
 
 @Injectable()
 export class UsersService {
@@ -20,11 +21,16 @@ export class UsersService {
         return this.usersRepository.findOne({ where: { user_id } });
       }
     
-    async create(user: Partial<Users>) {
-        await this.mailService.sendUserConfirmation(user, '123')
-
-        const newuser = this.usersRepository.create(user);
-        return this.usersRepository.save(newuser);
+    async create(token, user: Partial<Users>) {
+        // await this.mailService.sendUserConfirmation(user, '123')
+        user.created_on = getCurrentDate()
+        user.updated_at = getCurrentDate()
+        const userFound = await this.usersRepository.findOne({where: {user_id: user.user_id}})
+        console.log(userFound)
+        if(!userFound) {
+            const newuser = this.usersRepository.create(user);
+            return this.usersRepository.save(newuser);
+        } else return null
     }
     
     async update(user_id: number, user: Partial<Users>): Promise<Users> {
