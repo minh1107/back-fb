@@ -1,5 +1,5 @@
 import { Common } from "src/common/common.entity";
-import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Users } from "./users.entity";
 
 export enum role {
@@ -8,7 +8,7 @@ export enum role {
     ADMIN = 2,
   }
 
-@Entity('roles')
+@Entity()
 export class Roles extends Common{
     @PrimaryGeneratedColumn()
     role_id: number
@@ -16,7 +16,10 @@ export class Roles extends Common{
     @Column({type: 'enum', enum: role, default: role.USER})
     role: number
 
-    @ManyToMany(() => Users, users => users.roles)
+    @ManyToMany(() => Users, users => users.roles, {
+      onDelete: 'CASCADE',
+    })
+    @JoinTable()
     users: Users[]
 }
 

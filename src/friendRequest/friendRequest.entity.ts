@@ -1,5 +1,5 @@
 import { Common } from "src/common/common.entity";
-import { Users } from "src/users/users.entity";
+import { Users } from "src/users/entity/users.entity";
 import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

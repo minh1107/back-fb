@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from "@nestjs/common";
 import { UsersService } from "./users.service";
-import { Users } from "./users.entity";
+import { Users } from "./entity/users.entity";
 import { createUserDto } from "./dto/create-user.dto";
 import { MailService } from "../mail/mail.service";
 
@@ -21,12 +21,10 @@ export class UsersController {
         return user;
       }
     }
-    //create user
-    // @Post()
-    // async create(@Body() user: createUserDto) {
-    //   return this.usersService.create(user);
-    // }
-  
+    @Post('')
+    async create(@Body() user: createUserDto): Promise<any> {
+      return this.usersService.create(user)
+    }
     //update user
     @Put(':id')
     async update (@Param('id') id: number, @Body() user: Users): Promise<any> {

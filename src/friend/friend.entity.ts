@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Common } from "../common/common.entity";
-import { Users } from "src/users/users.entity";
+import { Users } from "src/users/entity/users.entity";
 
 @Entity()
 export class Friend extends Common {

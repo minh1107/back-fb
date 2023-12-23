@@ -1,6 +1,6 @@
 import Post from "src/post/post.entity";
 import PostComment from "src/postComment/postConment.entity";
-import { Users } from "src/users/users.entity";
+import { Users } from "src/users/entity/users.entity";
 import { Column, Entity, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 export enum emotion {

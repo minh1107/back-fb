@@ -1,5 +1,5 @@
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn, Unique } from "typeorm";
-import { Common } from "../common/common.entity";
+import { Common } from "../../common/common.entity";
 import { Roles } from "./roles.entity";
 import Post from "src/post/post.entity";
 import { Friend } from "src/friend/friend.entity";
@@ -58,7 +58,9 @@ export class Users extends Common{
     session: Auth[]
 
     // mot nguoi nhiều role, 1 role có nhièu người
-    @ManyToMany(() => Roles, role => role.users)
+    @ManyToMany(() => Roles, role => role.users,  {
+        onDelete: 'CASCADE',
+      })
     @JoinTable()
     roles: Roles[]
 

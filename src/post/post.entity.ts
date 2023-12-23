@@ -1,7 +1,7 @@
 import { Common } from "src/common/common.entity";
 import PostComment from "src/postComment/postConment.entity";
 import PostEmotion, { emotion } from "src/postEmotion/postEmotion.entity";
-import { Users } from "src/users/users.entity";
+import { Users } from "src/users/entity/users.entity";
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
