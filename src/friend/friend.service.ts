@@ -13,4 +13,5 @@ export class FriendService {
     async getAllFriend(): Promise<Friend[]> {
         return this.friendRepository.find({relations: ['user_id', 'friend']})
     }
+    
 }

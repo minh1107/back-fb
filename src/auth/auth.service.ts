@@ -57,7 +57,6 @@ export class AuthService {
         if(success===false) {
             res.redirect(`${this.configService.get('FRONTEND_URL')}/finalregister/false`)
         }
-        
     }
 
     async login(payload: loginDto) {
@@ -89,14 +88,24 @@ export class AuthService {
                 user_id: checkUser.user_id,
                 user: checkUser
             })
-
-            // await this.userRepository.update({roles: checkUser.roles}, {email: checkUser.email})
+            const {password, ...userInfo} = checkUser
             await this.authRepository.save(session)
             return {
                 accessToken, 
                 refreshToken,
-                checkUser
+                user: userInfo,
+                status: true,
+                message: 'Đăng nhập thành công'
             }
+        } else {
+            return {message: 'Thông tin đăng nhập không chính xác', status: false}
         }
+    }
+
+    async logout(userId) {
+        const res = this.authRepository.delete({user_id: userId} )
+        if((await res).affected > 0) {
+            return {message: "Đăng xuất thành công", status: true}
+        } else return {message: "Đăng xuất thất bại", status: false}
     }
 }

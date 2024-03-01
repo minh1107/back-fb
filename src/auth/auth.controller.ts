@@ -27,4 +27,9 @@ export class AuthController {
     async login(@Body() payload: loginDto) {
         return await this.authService.login(payload)
     }
+
+    @Get('/logout/:uid')
+    async logout(@Param('uid') userId: string) {
+        return await this.authService.logout(userId)
+    }
 }
